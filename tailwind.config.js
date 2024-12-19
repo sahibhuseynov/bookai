@@ -1,11 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+module.exports = {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'], // Varsayılan sans-serif ailesine eklenir
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'], // Özel bir sınıf için
+      },
+    },
   },
-  plugins: [],
-}
+  plugins: [require('daisyui')],
+};
