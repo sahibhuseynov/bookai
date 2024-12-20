@@ -1,8 +1,15 @@
 // src/components/Navbar.jsx
 import { Link} from 'react-router-dom';
-
+import { useSelector,useDispatch } from 'react-redux';
+import { clearUser} from '../features/userSlice';
 function Navbar() {
-    
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user); // Redux store'dan user state'ini alıyoruz
+   
+    const handleLogout = () => {
+        dispatch(clearUser()); // logoutUser action'ını dispatch ediyoruz
+        
+        }
   return (
     <div className="navbar bg-gradient-to-b from-[#f8f9fc] to-[#f8f9fc]  px-12">
       <div className="navbar-start">
@@ -49,7 +56,15 @@ function Navbar() {
         </ul>
       </div>
       <div className="navbar-end flex items-center gap-3 "> 
-      {/* {user?.user?.email ? (
+     
+          {
+            user?.user?.email ? (
+              <p className="text-md font-semibold text-green-600">Welcome</p> ) : 
+              <Link to="/register" className="btn  bg-primary   text-white text-base rounded-full px-5 py-2 ">
+            Signup
+        </Link>
+          }
+           {user?.user?.email ? (
           <button onClick={handleLogout} className="btn rounded-full bg-white">
             Logout
           </button>
@@ -57,10 +72,7 @@ function Navbar() {
           <Link to="/login" className="btn rounded-full px-6 py-2 bg-white shadow-md text-base">
             Login
           </Link>
-        )} */}
-        <Link to="/register" className="btn  bg-primary   text-white text-base rounded-full px-5 py-2 ">
-            Signup
-        </Link>
+        )}
       </div>
     </div>
   );

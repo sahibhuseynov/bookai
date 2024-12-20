@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'; // BrowserRouter ve Routes kul
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import CreateBookPage from './pages/CreateBookPage';
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
         <Route path="/" element={<HomePage />} /> {/* Ana sayfa */}
         <Route path="/login" element={<LoginPage />} /> {/* Giriş sayfası */}
         <Route path="/register" element={<RegisterPage />} /> {/* kayit sayfası */}
+        <Route path="/CreateBookPage" element={<CreateBookPage />} /> {/* CreateBookPage */}
+        <Route path="*" element={<h1>Not Found</h1>} /> {/* Tanımlanmayan sayfalar için 404 */}
       </Routes>
     
   );
