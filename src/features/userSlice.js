@@ -1,75 +1,25 @@
-// src/redux/userSlice.js
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { auth } from '../firebase/config';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createSlice } from '@reduxjs/toolkit';
 
-// Kayıt işlemi için createAsyncThunk
-export const registerUser = createAsyncThunk(
-  'user/register',
-  async ({ email, password }, { rejectWithValue }) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      return userCredential.user;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-// Giriş işlemi için createAsyncThunk
-export const loginUser = createAsyncThunk(
-  'user/login',
-  async ({ email, password }, { rejectWithValue }) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      return userCredential.user;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+const initialState = {
+  user: null, // Kullanıcı bilgileri burada tutulacak
+  error: null, // Hata mesajları burada tutulacak
+};
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    user: null,
-    loading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
-    logout: (state) => {
-      state.user = null;
+    setUser: (state, action) => {
+      state.user = action.payload; // Kullanıcı bilgilerini Redux'a kaydediyoruz
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(registerUser.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-        state.error = null;
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(loginUser.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-        state.error = null;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+    setError: (state, action) => {
+      state.error = action.payload; // Hata mesajını Redux'a kaydediyoruz
+    },
+    clearUser: (state) => {
+      state.user = null; // Kullanıcı bilgilerini temizliyoruz
+    },
   },
 });
 
-export const { logout } = userSlice.actions;
-
+export const { setUser, setError, clearUser } = userSlice.actions;
 export default userSlice.reducer;

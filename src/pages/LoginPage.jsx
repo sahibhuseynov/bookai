@@ -1,28 +1,44 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../features/userSlice';
+import { useDispatch } from 'react-redux';
+import { setUser, setError } from '../features/userSlice'; // Redux action'larını import ediyoruz
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setErrorState] = useState(''); // Local error state
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, loading } = useSelector((state) => state.user); // Redux'tan kullanıcı bilgilerini alıyoruz
-
   const handleLogin = () => {
     if (email && password) {
-      // Kullanıcı bilgilerini kontrol et
-      if (user && user.email === email && user.password === password) {
-        dispatch(loginUser({ email, password }));
-        navigate('/'); // Kullanıcı başarılı bir şekilde giriş yaptıysa anasayfaya yönlendir
-      } else {
-        setError('Invalid email or password'); // Hatalı giriş
-      }
+      const authInstance = getAuth();
+
+      // Firebase üzerinden giriş yap
+      signInWithEmailAndPassword(authInstance, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log('User logged in: ', user); // Giriş yapan kullanıcı bilgilerini logla
+
+          // Kullanıcıyı Redux'a kaydet
+          dispatch(setUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          }));
+
+          // Başarılı giriş sonrası anasayfaya yönlendir
+          navigate('/');
+        })
+        .catch((error) => {
+          // Hatalı giriş durumunda hata mesajı
+          setErrorState('Invalid email or password');
+          dispatch(setError('Invalid email or password')); // Redux'a da error'ı kaydet
+        });
     } else {
-      setError('Please fill in both fields'); // Alanlar boş bırakılmamalı
+      setErrorState('Please fill in both fields'); // Alanlar boş bırakılmamalı
     }
   };
 
@@ -62,11 +78,10 @@ function LoginPage() {
             </div>
             <button
               type="button"
-              className={`btn w-full ${loading ? 'btn-disabled' : 'btn-primary'}`}
+              className="btn w-full btn-primary"
               onClick={handleLogin}
-              disabled={loading}
             >
-              {loading ? 'Logging in...' : 'Login'}
+              Login
             </button>
             {error && (
               <p className="text-sm text-red-500 text-center">
