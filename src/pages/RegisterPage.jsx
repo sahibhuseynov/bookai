@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../features/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -74,12 +74,12 @@ function RegisterPage() {
           </form>
           <p className="text-sm text-center text-gray-500 dark:text-gray-400">
             Already have an account?{' '}
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="text-primary font-medium underline dark:text-primary-content"
             >
               Login here
-            </a>
+            </Link>
           </p>
         </div>
       </div>

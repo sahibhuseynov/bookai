@@ -11,7 +11,7 @@ function Navbar() {
         
         }
   return (
-    <div className="navbar bg-eff2fd  px-12">
+    <div className="navbar bg-gradient-to-b from-[#f8f9fc] to-[#f8f9fc]  px-12">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

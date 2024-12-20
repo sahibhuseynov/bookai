@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../features/userSlice';
 import { useNavigate } from 'react-router-dom';
@@ -6,23 +6,25 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, loading, error } = useSelector((state) => state.user); // Redux'tan kullanıcı bilgilerini alıyoruz
+  const { user, loading } = useSelector((state) => state.user); // Redux'tan kullanıcı bilgilerini alıyoruz
 
   const handleLogin = () => {
     if (email && password) {
-      dispatch(loginUser({ email, password }));
+      // Kullanıcı bilgilerini kontrol et
+      if (user && user.email === email && user.password === password) {
+        dispatch(loginUser({ email, password }));
+        navigate('/'); // Kullanıcı başarılı bir şekilde giriş yaptıysa anasayfaya yönlendir
+      } else {
+        setError('Invalid email or password'); // Hatalı giriş
+      }
+    } else {
+      setError('Please fill in both fields'); // Alanlar boş bırakılmamalı
     }
   };
-
-  // Kullanıcı giriş yaptıysa, anasayfaya yönlendir
-  useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
-  }, [user, navigate]);
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
@@ -73,7 +75,7 @@ function LoginPage() {
             )}
           </form>
           <p className="text-sm text-center text-gray-500 dark:text-gray-400">
-            Dont have an account?{' '}
+            Don't have an account?{' '}
             <a
               href="/register"
               className="text-primary font-medium underline dark:text-primary-content"
