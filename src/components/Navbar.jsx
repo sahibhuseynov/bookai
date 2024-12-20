@@ -11,7 +11,7 @@ function Navbar() {
         
         }
   return (
-    <div className="navbar bg-eff2fd  px-20">
+    <div className="navbar bg-eff2fd  px-12">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -55,17 +55,17 @@ function Navbar() {
           <li><Link to="/contact">Contact</Link></li>
         </ul>
       </div>
-      <div className="navbar-end flex items-center "> 
+      <div className="navbar-end flex items-center gap-3 "> 
       {user?.user?.email ? (
           <button onClick={handleLogout} className="btn rounded-full bg-white">
             Logout
           </button>
         ) : (
-          <Link to="/login" className="btn rounded-full px-6 bg-white shadow-md text-xl">
+          <Link to="/login" className="btn rounded-full px-6 py-2 bg-white shadow-md text-base">
             Login
           </Link>
         )}
-        <Link to="/signup" className="btn ml-2 bg-primary  text-xl  text-white rounded-full px-6 ">
+        <Link to="/register" className="btn  bg-primary   text-white text-base rounded-full px-5 py-2 ">
             Signup
         </Link>
       </div>
