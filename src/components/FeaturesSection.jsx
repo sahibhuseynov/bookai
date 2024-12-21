@@ -4,11 +4,12 @@ import { motion } from "framer-motion"; // motion import edilmiştir
 import pixar1 from "../assets/images/pixar 1.webp";
 import pixar2 from "../assets/images/pixar 2.webp";
 import pixar3 from "../assets/images/pixar 3.webp";
-
+import pixar4 from "../assets/images/pixar 4.webp";
 const books = [
   { id: 1, title: "Pixar 1", img: pixar1 },
   { id: 2, title: "Pixar 2", img: pixar2 },
   { id: 3, title: "Pixar 3", img: pixar3 },
+  { id: 4, title: "Pixar 4", img: pixar4 },
 ];
 
 function BooksShowcaseSection() {

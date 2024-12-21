@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'; // BrowserRouter ve Routes kul
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import CreateBookPage from './pages/CreateBookPage';
+import CreateBookPage from './pages/CreateBookPage/CreateBookPage';
 
 function App() {
   return (

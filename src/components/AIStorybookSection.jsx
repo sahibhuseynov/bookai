@@ -1,13 +1,13 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { motion } from "framer-motion"; // Motion import edilmiştir
-import feature1 from "../assets/images/pixar 1.webp"; // Resim örnekleri
 import feature2 from "../assets/images/aiimage1.webp";
 import feature3 from "../assets/images/aiimage2.webp";
+import feature4 from "../assets/images/aiimage3.webp";
 import { FaStarOfLife } from "react-icons/fa6";const features = [
-  { id: 1, title: "Interactive Stories", img: feature1 },
-  { id: 2, title: "Personalized Adventure", img: feature2 },
-  { id: 3, title: "Fun Narration", img: feature3 },
+  { id: 1, title: "Personalized Adventure", img: feature2 },
+  { id: 2, title: "Fun Narration", img: feature3 },
+  { id: 3, title: "Engaging Content", img: feature4 },
 ];
 
 function AIStorybookSection() {

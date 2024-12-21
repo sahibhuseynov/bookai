@@ -40,9 +40,8 @@ function HeroSection() {
         <div className="flex items-center justify-center">
           <Link to={user.user? "/CreateBookPage" : "/login"}>
             <button
-              className={`flex items-center gap-2 justify-center mt-6 px-6 py-3 rounded-full text-white bg-blue-600 duration-300 transform hover:scale-105 ${
-                user.user ? 'bg-green-600' : ''
-              }`}
+              className={"flex items-center gap-2 justify-center mt-6 px-6 py-3 rounded-full text-white bg-blue-600 duration-300 transform hover:scale-105 "
+              }
             >
               Start writing now <FaLongArrowAltRight size={20} />
             </button>

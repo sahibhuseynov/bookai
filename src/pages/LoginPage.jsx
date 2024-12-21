@@ -30,7 +30,7 @@ function LoginPage() {
           }));
 
           // Başarılı giriş sonrası anasayfaya yönlendir
-          navigate('/');
+          navigate('/CreateBookPage');
         })
         .catch((error) => {
           // Hatalı giriş durumunda hata mesajı
