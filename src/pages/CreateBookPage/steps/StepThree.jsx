@@ -1,6 +1,18 @@
 import { useState } from "react";
-function StepThree( {onBack, onSubmit} ) {
-  const [pages, setPages] = useState(5);
+import { useDispatch, useSelector } from "react-redux"; // useDispatch ve useSelector import ediyoruz
+import { setBookPages } from "../../../features/bookSlice"; // Redux aksiyonunu import ediyoruz
+
+function StepThree({ onBack, onSubmit }) {
+  const dispatch = useDispatch();
+  const pagesFromRedux = useSelector((state) => state.book.pages); // Redux'tan sayfa sayısını alıyoruz
+
+  const [pages, setPages] = useState(pagesFromRedux); // Başlangıçta Redux'tan alınan sayfa sayısını state'e set ediyoruz
+
+  const handlePagesChange = (e) => {
+    const value = Math.min(Math.max(e.target.value, 1), 50); // Sayfa sayısını 1 ile 50 arasında sınırlıyoruz
+    setPages(value); // Sayfa sayısını state'e set ediyoruz
+    dispatch(setBookPages(value)); // Redux store'a sayfa sayısını kaydediyoruz
+  };
 
   return (
     <div className="max-w-md mx-auto">
@@ -10,10 +22,10 @@ function StepThree( {onBack, onSubmit} ) {
         <input
           type="number"
           value={pages}
-          onChange={(e) => setPages(e.target.value)}
+          onChange={handlePagesChange} // Sayfa sayısı değiştiğinde Redux'a kaydediyoruz
           min={1}
           max={50}
-          className="w-full border border-gray-300 rounded px-4 py-2"
+          className="input input-bordered w-full text-white bg-inputdark focus:outline-none"
         />
       </div>
       <div className="mt-4">
@@ -25,7 +37,7 @@ function StepThree( {onBack, onSubmit} ) {
         </button>
         <button
           onClick={() => onSubmit({ pages })}
-          className="px-6 py-2 bg-blue-600 text-white rounded"
+          className="px-6 py-2 bg-primary text-white rounded"
         >
           Create Book
         </button>

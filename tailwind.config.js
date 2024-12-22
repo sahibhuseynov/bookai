@@ -7,10 +7,9 @@ module.exports = {
         jakarta: ['"Plus Jakarta Sans"', 'sans-serif'], // Özel bir sınıf için
       },
       colors: {
-        primary: {
-          DEFAULT: '#3B82F6',
-          dark: '#2563EB',
-        },
+        darkblue: '#05080f', // darkblue adında bir renk tanımlandı
+        darkblue2: '#0a0f17', // darkblue2 adında bir renk tanımlandı
+        inputdark: '#242a37', // inputdark adında bir renk tanımlandı
       },
     },
   },

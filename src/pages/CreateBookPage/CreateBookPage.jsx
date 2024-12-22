@@ -25,7 +25,7 @@ function CreateBookPage() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-b from-fuchsia-800 to-slate-700">
+    <div className="flex flex-col h-screen bg-darkblue">
       {/* Header Component */}
       <Header onLogout={() => dispatch(clearUser())} />
 
@@ -33,15 +33,15 @@ function CreateBookPage() {
       <div className="flex-1 flex flex-col text-white">
         {/* Başlangıç Mesajı */}
         {currentStep === 1 && (
-          <div className="text-center mt-8 mb-4">
-            <h1 className="text-4xl font-extrabold">Start creating your Ebook!</h1>
-            <p className="mt-4 text-lg">Generate your Ebook in just 4 steps.</p>
+          <div className="text-center mt-8 ">
+            <h1 className="text-4xl font-extrabold">Start creating your Book!</h1>
+            <p className="mt-4 text-lg text-white ">Generate your Book in just 4 steps.</p>
           </div>
         )}
 
         {/* DaisyUI Step Progress Bar (currentStep 5 olduğunda gizlenir) */}
         {currentStep !== 5 && (
-          <ul className="steps my-4">
+          <ul className="steps my-4 z-0">
             {steps.map((step, index) => (
               <li
                 key={index}
