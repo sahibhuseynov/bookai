@@ -55,7 +55,7 @@ function Navbar() {
           <li><Link to="/contact">Contact</Link></li>
         </ul>
       </div>
-      <div className="navbar-end flex items-center gap-3 "> 
+      <div className="navbar-end  hidden sm:flex items-center gap-3 "> 
      
           {
             user?.user?.email ? (
